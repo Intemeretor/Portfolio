@@ -1,0 +1,14 @@
+.wrapper {
+	font-family: "Montserrat";
+	min-height: 100%;
+	width: 100%;
+	background: linear-gradient(45deg, rgba(119, 102, 214, 0.411), rgb(65, 53, 65));
+	padding: 1px 0px 0px 0px;
+	overflow: hidden;
+	position: relative;
+}
+
+.container {
+	max-width: 1300px;
+	margin: 0 auto;
+}

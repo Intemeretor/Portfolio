@@ -1,0 +1,13 @@
+.weeks {
+	&__container {
+	}
+
+	&__row {
+		padding: 25px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+}
+.container {
+}
