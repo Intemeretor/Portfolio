@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export default function Head() {
 	const [hint, setHint] = useState({
-		active: true,
+		active: false,
 		text: 'Тут ви можете подивитись дні тижня'
 	})
 	function showHint() {
