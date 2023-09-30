@@ -1,4 +1,4 @@
-import './Head.scss';
+import './Header.scss';
 import { useState } from 'react';
 
 export default function Head() {
@@ -27,9 +27,9 @@ export default function Head() {
 
 				</div>
 			</header>
-			<div className={`hint ${hint.active && 'active'}`}>
+			{/* <div className={`hint ${hint.active && 'active'}`}>
 				<p>{hint.text}</p>
-			</div>
+			</div> */}
 		</>
 	)
 

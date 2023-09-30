@@ -3,14 +3,16 @@ import React from 'react'
 import TodoList from './TodoList';
 import './Todo.scss'
 import { useState } from 'react';
-import Head
-	from '../Head/Head';
+
 export default function Todo(props) {
-	const [newTodo, setNewTodo] = useState('');
-	const [todos, setTodos] = useState([]);
+	const [newTodo, setNewTodo] = useState({
+		text: '',
+		editable: false
+	});
+	const [todo, setTodo] = useState([]);
 
 	function newTodoHandler(e) {
-		setNewTodo(prev => e.target.value);
+		setNewTodo(prev => ({ ...prev, text: e.target.value }));
 	}
 	function hidePlaceholder(e) {
 		e.target.placeholder = '';
@@ -20,13 +22,16 @@ export default function Todo(props) {
 	}
 	function addTodo(e) {
 		e.preventDefault();
-		if (newTodo.length > 0) {
-			setTodos(prev => ([...prev, newTodo]));
-			setNewTodo('');
+		if (newTodo.text.length > 0) {
+			setTodo(prev => ([...prev, newTodo]));
+			setNewTodo({
+				text: '',
+				editable: false
+			});
 		}
 	}
 	function deleteTodo(id) {
-		setTodos(prev => {
+		setTodo(prev => {
 			let newArr = [];
 			for (let i = 0; i < prev.length; i++) {
 				if (i != id) {
@@ -36,18 +41,52 @@ export default function Todo(props) {
 			return newArr
 		})
 	}
+	function editTodo(e, id) {
+		console.log(e);
+		setTodo(prev => {
+			let newArr = [];
+			for (let i = 0; i < prev.length; i++) {
+				if (i != id) {
+					newArr.push(prev[i]);
+				} else {
+					prev[i] = { ...prev[i], text: e.target.value }
+					newArr.push(prev[i]);
+				}
+			}
+			return newArr
+		})
+	}
+	function changeEditableStatus(id) {
 
-	let list = todos.map((item, index) => <TodoList
+		setTodo(prev => {
+
+			let newArr = [];
+			for (let i = 0; i < prev.length; i++) {
+				if (i != id) {
+					newArr.push(prev[i]);
+				} else {
+					let changed = { ...prev[i], editable: !prev[i].editable }
+					newArr.push(changed);
+				}
+			}
+			return newArr
+		})
+	}
+	let list = todo.map((item, index) => <TodoList
 		key={index}
 		id={index}
-		task={item}
+		task={item.text}
 		dlt={deleteTodo}
+		edit={editTodo}
+		editable={item.editable}
+		changeEditable={changeEditableStatus}
 	/>);
 	return (
 
 		<section className='todo'>
-			<h2 className='todo__title'>{props.day}</h2>
-			<div className="todo__body">
+
+			<div className="todo__container container">
+				<h2 className='todo__title'>{`Todo #1`}</h2>
 				<form
 					action=""
 					className="todo__form"
@@ -60,7 +99,7 @@ export default function Todo(props) {
 						onChange={(e) => newTodoHandler(e)}
 						className='todo__input'
 						type="text"
-						value={newTodo}
+						value={newTodo.text}
 					/>
 					<button className="todo__button"><span>Add</span></button>
 				</form>

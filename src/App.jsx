@@ -1,21 +1,22 @@
 import { useState } from 'react'
 import './App.scss'
 
-import Head from './components/Head/Head';
+import Head from './components/Header/Header';
 import Todo from './components/Todo/Todo';
 import Weeks from './components/Weeks/Weeks';
+
+
 function App() {
 
+	const [todosList, setTodosList] = useState([]);
+
+
 	return (
-		<>
+		<main className='wrapper'>
 			<Head />
-			<main className='wrapper'>
-				{/* <Todo /> */}
-				<Weeks />
-			</main>
-
-		</>
-
+			<Todo />
+			{/* <Weeks /> */}
+		</main>
 	)
 }
 

@@ -1,21 +1,22 @@
 .todo {
+	margin: 100px 0px 0px 0px;
+	padding: 10px 10px;
 	&__title {
 		text-align: center;
 		color: white;
 		font-size: 26px;
 		margin: 0px 0px 40px 0px;
 	}
-	max-width: 550px;
-	margin: 0 auto;
-	width: 100%;
-	background-color: #2c2b2b;
-	transition: all 0.5s ease 0s;
 
-	padding: 30px;
-	border-radius: 5px;
-	box-shadow: 10px 10px 15px #000000;
+	&__container {
+		max-width: 550px;
 
-	&__body {
+		width: 100%;
+		background-color: #2c2b2b;
+		transition: all 0.5s ease 0s;
+		padding: 30px;
+		border-radius: 5px;
+		box-shadow: 10px 10px 15px #000000;
 	}
 
 	&__form {
@@ -48,52 +49,83 @@
 	}
 
 	&__list {
-		li {
+		.todo__element {
+			padding: 4px;
+			transition: all 1s ease 0s;
 			align-items: center;
-			justify-content: space-between;
+			justify-content: flex-end;
 			border-radius: 10px;
 			box-shadow:
 				-1px -1px 5px rgba(221, 215, 215, 0.192),
 				5px 5px 10px rgba(0, 0, 0, 0.4);
 			transition: all 0.5s ease 0s;
-			gap: 5px;
+			gap: 15px;
 			display: flex;
 			user-select: none;
-			padding: 10px;
+
 			margin: 0px 0px 15px 0px;
 			&:last-child {
 				margin: 0px 0px 0px 0px;
 			}
+			&.edit {
+				background-color: #292828;
+				box-shadow:
+					0px 0px 0px rgba(221, 215, 215, 0),
+					0px 0px 0px rgba(0, 0, 0, 0);
+			}
 		}
 	}
 
-	&__task {
-		font-weight: 400;
-		color: white;
+	&__edit {
+		padding: 10px;
+		background-color: transparent;
+		height: 100%;
+		border-bottom: 1px solid rgb(143, 204, 159);
+		width: 100%;
 		font-size: 1.5rem;
-		flex: 1 1 70%;
+		color: rgb(255, 255, 255);
+		border-radius: 5px;
+	}
+	&__line {
+		flex: 1 1 auto;
+	}
+	&__task {
+		padding: 10px;
+		font-weight: 400;
+		color: rgb(255, 255, 255);
+		font-size: 1.5rem;
+		flex: 1 1 auto;
 		position: relative;
-		max-width: 70%;
+		max-width: 100%;
 		p {
+			letter-spacing: 2px;
+			word-break: break-all;
 			max-width: 100%;
-			overflow-wrap: break-word;
-			white-space: normal;
 		}
 	}
 	&__btns {
-		flex: 1 0 auto;
+		flex: 0 0 auto;
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-end;
 	}
 	&__btn {
 		background-color: transparent;
 		padding: 10px 10px;
 	}
 	.edit-btn {
+		transition: all 0.5s ease 0s;
+		border: 1px solid rgba(0, 250, 0, 0);
 		span {
-			color: #2f9e03;
+			transition: all 0.5s ease 0s;
+			color: rgb(143, 204, 159);
 			font-family: "Montserrat";
 			font-weight: 800;
+		}
+		&:hover {
+			border: 1px solid rgb(0, 250, 0);
+			span {
+				color: rgb(0, 250, 0);
+			}
 		}
 	}
 	.alarm-btn {

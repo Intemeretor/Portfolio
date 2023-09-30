@@ -1,9 +1,11 @@
 .header {
-	position: relative;
+	width: 100%;
+	position: fixed;
 	z-index: 100;
-	background: linear-gradient(45deg, rgb(38, 11, 134), rgb(18, 27, 155));
+	background-color: #02020267;
+	box-shadow: 0 5px 10px #000;
+	// background: linear-gradient(45deg, rgb(38, 11, 134), rgb(18, 27, 155));
 	padding: 15px 100px;
-
 	&__navigation {
 	}
 
