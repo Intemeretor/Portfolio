@@ -13,16 +13,12 @@ export default function Todo(props) {
 	const [todo, setTodo] = useState([]);
 
 	useEffect(() => {
-		const data = localStorage.getItem('todos');
-
-		if (data) {
-			setTodo(JSON.parse(data));
-
-		}
+		const data = JSON.parse(localStorage.getItem('todos'));
+		setTodo(data || []); // Встановлюємо пустий масив, якщо дані відсутні
 	}, []);
 	useEffect(() => {
 		localStorage.setItem('todos', JSON.stringify(todo));
-	}, [todo])
+	}, [todo]);
 
 
 
