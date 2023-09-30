@@ -13,10 +13,10 @@ function App() {
 
 	return (
 		<main className='wrapper'>
-			<Head />
+			{/* <Head />
 
 
-			<Todo />
+			<Todo /> */}
 			{/* <Weeks /> */}
 		</main>
 	)
