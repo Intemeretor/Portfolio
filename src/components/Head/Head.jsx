@@ -19,7 +19,7 @@ export default function Head() {
 					<nav className="header__navigation">
 						<ul className="header__list">
 							<li className='header__link' onMouseEnter={showHint} onMouseLeave={hideHint}>
-								<a href="">Week</a>
+								<a href="">Todo</a>
 							</li>
 
 						</ul>
