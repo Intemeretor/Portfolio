@@ -2,14 +2,29 @@
 import React from 'react'
 import TodoList from './TodoList';
 import './Todo.scss'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Todo(props) {
+
 	const [newTodo, setNewTodo] = useState({
 		text: '',
 		editable: false
 	});
 	const [todo, setTodo] = useState([]);
+
+	useEffect(() => {
+		const data = localStorage.getItem('todos');
+
+		if (data) {
+			setTodo(JSON.parse(data));
+
+		}
+	}, []);
+	useEffect(() => {
+		localStorage.setItem('todos', JSON.stringify(todo));
+	}, [todo])
+
+
 
 	function newTodoHandler(e) {
 		setNewTodo(prev => ({ ...prev, text: e.target.value }));
