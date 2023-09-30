@@ -1,4 +1,4 @@
-import './Header.scss';
+import './Head.scss';
 import { useState } from 'react';
 
 export default function Head() {
