@@ -1,0 +1,27 @@
+.sidebar {
+	z-index: 101;
+	position: absolute;
+	height: 100%;
+
+	max-width: 300px;
+	width: 50%;
+	background: linear-gradient(45deg, #404041, rgb(27, 26, 26));
+	box-shadow: 5px 10px 10px rgb(211, 208, 208);
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	&__body {
+		margin: 0 auto;
+	}
+
+	&__list {
+		display: flex;
+		justify-content: center;
+	}
+
+	&__link {
+		border: 1px solid #000;
+		color: White;
+		font-size: 1.875rem;
+	}
+}

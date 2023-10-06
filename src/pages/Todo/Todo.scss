@@ -56,9 +56,7 @@
 			border-radius: 10px;
 			box-shadow:
 				-1px -1px 5px rgba(221, 215, 215, 0.192),
-				5px 5px 10px rgba(0, 0, 0, 0.4),
-				inset 0px -3px 5px rgba(255, 253, 253, 0),
-				inset 2px 2px 5px rgba(0, 0, 0, 0);
+				5px 5px 10px rgba(0, 0, 0, 0.4);
 			transition: all 0.3s ease 0s;
 
 			display: flex;
@@ -69,11 +67,7 @@
 			}
 			&.edit {
 				background-color: #292828;
-				box-shadow:
-					10px 10px 10px rgba(255, 0, 0, 0),
-					5px 5px 10px rgba(0, 0, 0, 0.4),
-					inset -2px -2px 2px rgba(255, 253, 253, 0.226),
-					inset 2px 2px 5px rgba(0, 0, 0, 0.226);
+				box-shadow: inset 6px 6px 14px -6px rgba(0, 0, 0, 0.5);
 			}
 		}
 	}

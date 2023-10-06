@@ -1,5 +1,6 @@
 import './Head.scss';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Head() {
 	const [hint, setHint] = useState({
@@ -13,24 +14,20 @@ export default function Head() {
 		setHint(prev => ({ ...prev, active: false }))
 	}
 	return (
-		<>
-			<header className="header">
-				<div className="header__container container">
-					<nav className="header__navigation">
-						<ul className="header__list">
-							<li className='header__link' onMouseEnter={showHint} onMouseLeave={hideHint}>
-								<a href="">Todo</a>
-							</li>
 
-						</ul>
-					</nav>
+		<header className="header">
+			<div className="header__container container">
+				<nav className="header__navigation">
+					<div className='header__homepage' ><Link className='header__link' to="/">VLPR</Link></div>
+					<div className='header__projects'>
+						<button className='header__button'>Projects</button>
+					</div>
 
-				</div>
-			</header>
-			{/* <div className={`hint ${hint.active && 'active'}`}>
-				<p>{hint.text}</p>
-			</div> */}
-		</>
+				</nav>
+
+			</div>
+		</header>
+
 	)
 
 }

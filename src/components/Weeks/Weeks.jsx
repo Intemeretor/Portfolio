@@ -1,7 +1,7 @@
 import React from 'react';
 import './Weeks.scss'
 import Week from './Week';
-import Todo from '../Todo/Todo';
+import Todo from '../../pages/Todo/Todo';
 import WeeksData from './WeeksData';
 
 

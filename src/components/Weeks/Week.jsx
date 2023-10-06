@@ -1,5 +1,5 @@
 import React from 'react';
-import Todo from '../Todo/Todo';
+import Todo from '../../pages/Todo/Todo';
 
 
 function Week(props) {

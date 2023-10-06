@@ -5,40 +5,49 @@
 	background-color: #02020267;
 	box-shadow: 0 5px 10px #000;
 	// background: linear-gradient(45deg, rgb(38, 11, 134), rgb(18, 27, 155));
-	padding: 15px 100px;
+	padding: 15px 15px;
 	&__navigation {
-	}
-
-	&__list {
+		position: relative;
 		display: flex;
-		.header__link {
-			position: relative;
-		}
+		justify-content: space-between;
+		align-items: center;
+		gap: 15px;
+	}
+	&__homepage {
 		a {
+			flex: 1 1 auto;
 			z-index: 10;
 			display: block;
-			font-size: 1.875rem;
-			color: rgba(185, 182, 182, 0.637);
+			font-size: 30px;
+			color: rgba(255, 255, 255, 0.521);
 			font-family: "Roboto Slab";
 			font-weight: 500;
 		}
 	}
-}
-.hint {
-	transform: translateY(-150%);
-	p {
-		font-size: 22px;
+	&__button {
+		background-color: transparent;
+		font-size: 30px;
+		font-weight: 500;
+		color: rgba(255, 255, 255, 0.521);
 	}
-	transition: all 1s ease 0s;
-
-	&.active {
-		transform: translateY(-5%);
+	&__projects {
+		position: relative;
 	}
+	&__list {
+		bottom: 0;
+		padding: 5px;
 
-	z-index: 5;
-	color: white;
-	padding: 15px;
-	border-radius: 5px;
-	background-color: #3a3a3aa2;
-	position: absolute;
+		width: 100%;
+		position: absolute;
+		display: flex;
+		background-color: #a09d9dea;
+		.header__link {
+			z-index: 10;
+			display: block;
+			font-size: 25px;
+			color: rgb(144, 56, 245);
+			font-family: "Roboto Slab";
+			font-weight: 500;
+		}
+	}
 }
