@@ -11,13 +11,6 @@ export default function TodoItem({ darkMode, cardId } = props) {
 
 
 
-	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('todos'));
-		setTodo(data || []); // Встановлюємо пустий масив, якщо дані відсутні
-	}, []);
-	useEffect(() => {
-		localStorage.setItem('todos', JSON.stringify(todo));
-	}, [todo]);
 
 
 
