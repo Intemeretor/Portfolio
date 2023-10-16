@@ -2,7 +2,7 @@
 import React from 'react'
 import './Todo.scss'
 import TodoItem from './TodoItem';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Todo({ darkMode } = props) {
 
@@ -12,14 +12,6 @@ export default function Todo({ darkMode } = props) {
 	function createTodoCard() {
 		setTodoCards(prev => [...prev, <TodoItem darkMode={darkMode} cardId={todoCards.length + 1} />])
 	}
-	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('todos'));
-		setTodoCards(data || []); // Встановлюємо пустий масив, якщо дані відсутні
-	}, []);
-	useEffect(() => {
-		localStorage.setItem('todos', JSON.stringify(todoCards));
-	}, [todoCards]);
-
 	// const cards = todoCards.map((item,index) => item)
 	return (
 
@@ -28,7 +20,9 @@ export default function Todo({ darkMode } = props) {
 				<div className="todo__control">
 					<button onClick={createTodoCard} className="todo__control-button">Create card</button>
 					<button onClick={createTodoCard} className="todo__control-button">Find card</button>
+
 				</div>
+
 				<div className="todo__row">
 					{todoCards}
 				</div>
