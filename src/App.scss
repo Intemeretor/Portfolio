@@ -2,14 +2,34 @@
 	font-family: "Montserrat";
 	min-height: 100%;
 	width: 100%;
-	background: linear-gradient(135deg, rgb(185, 181, 181), rgb(149, 182, 176));
+	background: linear-gradient(135deg, rgb(178, 179, 178), rgb(149, 185, 179));
 	overflow: hidden;
 	position: relative;
+	transition: all 1s ease 0s;
+
 	.scrollable {
 		height: 100%;
 	}
+	&.isDark {
+		background: linear-gradient(135deg, rgb(56, 56, 56), rgb(0, 0, 0));
+		// background-size: 300% 300%;
+		// animation: Gradient 10s ease infinite;
+	}
+	// background-size: 300% 300%;
+	// animation: Gradient 10s ease infinite;
 }
 
+@keyframes Gradient {
+	0% {
+		background-position: 10% 0%;
+	}
+	50% {
+		background-position: 91% 100%;
+	}
+	100% {
+		background-position: 10% 0%;
+	}
+}
 .container {
 	max-width: 1300px;
 	margin: 0 auto;

@@ -9,14 +9,19 @@
 	}
 
 	&__container {
+	}
+	.todo__item {
 		max-width: 550px;
-
+		margin: 0 auto;
 		width: 100%;
 		background-color: #2c2b2b;
 		transition: all 0.5s ease 0s;
 		padding: 30px;
 		border-radius: 5px;
 		box-shadow: 10px 10px 15px #000000;
+		&.isDark {
+			background-color: #464444;
+		}
 	}
 
 	&__form {

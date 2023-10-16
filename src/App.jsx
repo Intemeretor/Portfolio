@@ -12,19 +12,21 @@ import Sidebar from './components/Sidebar/Sidebar';
 function App() {
 
 	const [sideActive, setSideActive] = useState(false);
-
+	const [darkMode, setDarkMode] = useState(false);
 	function sidebarHandler() {
 		setSideActive(prev => !prev);
 	}
 
-
 	return (
-		<main className={`wrapper ${sideActive ? 'scrollable' : ''}`}>
-			<Head sidebarHandler={sidebarHandler} />
+		<main className={`wrapper 
+		${darkMode ? 'isDark' : ''}  
+		${sideActive ? 'scrollable' : ''}`}
+		>
 
+			<Head setDarkMode={setDarkMode} sidebarHandler={sidebarHandler} darkMode={darkMode} />
 			<Routes>
 				<Route path='/Portfolio' element={<Home />} />
-				<Route path='/Portfolio/Todo' element={<Todo />} />
+				<Route path='/Portfolio/Todo' element={<Todo darkMode={darkMode} />} />
 			</Routes>
 
 			<Sidebar sidebarHandler={sidebarHandler} sideActive={sideActive} />
