@@ -19,8 +19,8 @@ function App() {
 			<Head />
 
 			<Routes>
-				<Route index element={<Home />} />
-				<Route path='/Todo' element={<Todo />} />
+				<Route path='/Portfolio' element={<Home />} />
+				<Route path='/Portfolio/Todo' element={<Todo />} />
 			</Routes>
 			<Sidebar />
 		</main>

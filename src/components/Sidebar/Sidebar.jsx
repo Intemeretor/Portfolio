@@ -7,7 +7,7 @@ export default function Sidebar() {
 		<aside className="sidebar">
 			<nav className="sidebar__body">
 				<ul className="sidebar__list">
-					<li><Link to={`/Todo`} className="sidebar__link">Todo</Link></li>
+					<li><Link to={`Portfolio/Todo`} className="sidebar__link">Todo</Link></li>
 				</ul>
 			</nav>
 		</aside>

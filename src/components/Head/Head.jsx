@@ -18,7 +18,7 @@ export default function Head() {
 		<header className="header">
 			<div className="header__container container">
 				<nav className="header__navigation">
-					<div className='header__homepage' ><Link className='header__link' to="/">VLPR</Link></div>
+					<div className='header__homepage' ><Link className='header__link' to="/Portfolio">VLPR</Link></div>
 					<div className='header__projects'>
 						<button className='header__button'>Projects</button>
 					</div>
