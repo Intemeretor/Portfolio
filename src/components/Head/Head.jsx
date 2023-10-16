@@ -12,7 +12,7 @@ export default function Head({ sidebarHandler, darkMode, setDarkMode } = props) 
 			<div className="header__container container">
 				<nav className="header__navigation">
 					<div className='header__homepage' >
-						<Link className='header__link' to="/Home">VLPR</Link>
+						<Link className='header__link' to="/Portfolio/Home">VLPR</Link>
 					</div>
 					<div onClick={changeMode} className="header__darkmode darkmode" >
 						<button className="darkmode__button">
