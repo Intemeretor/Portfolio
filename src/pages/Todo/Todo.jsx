@@ -19,8 +19,8 @@ export default function Todo({ darkMode } = props) {
 			<div className="todo__container container">
 				<div className="todo__control">
 					<button onClick={createTodoCard} className="todo__control-button">Create card</button>
-					<button onClick={createTodoCard} className="todo__control-button">Find card</button>
-
+					<button className="todo__control-button">Find card</button>
+					<button className="todo__control-button">Hide cards</button>
 				</div>
 
 				<div className="todo__row">
