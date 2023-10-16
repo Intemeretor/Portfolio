@@ -5,6 +5,9 @@
 	background: linear-gradient(135deg, rgb(185, 181, 181), rgb(149, 182, 176));
 	overflow: hidden;
 	position: relative;
+	.scrollable {
+		height: 100%;
+	}
 }
 
 .container {

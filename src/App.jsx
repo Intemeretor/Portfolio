@@ -11,18 +11,23 @@ import Sidebar from './components/Sidebar/Sidebar';
 
 function App() {
 
-	const [todosList, setTodosList] = useState([]);
+	const [sideActive, setSideActive] = useState(false);
+
+	function sidebarHandler() {
+		setSideActive(prev => !prev);
+	}
 
 
 	return (
-		<main className='wrapper'>
-			<Head />
+		<main className={`wrapper ${sideActive ? 'scrollable' : ''}`}>
+			<Head sidebarHandler={sidebarHandler} />
 
 			<Routes>
 				<Route path='/Portfolio' element={<Home />} />
 				<Route path='/Portfolio/Todo' element={<Todo />} />
 			</Routes>
-			<Sidebar />
+
+			<Sidebar sidebarHandler={sidebarHandler} sideActive={sideActive} />
 		</main>
 	)
 }
