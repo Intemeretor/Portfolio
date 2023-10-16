@@ -12,7 +12,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 function App() {
 
 	const [sideActive, setSideActive] = useState(false);
-	const [darkMode, setDarkMode] = useState(false);
+	const [darkMode, setDarkMode] = useState(true);
 	function sidebarHandler() {
 		setSideActive(prev => !prev);
 	}
