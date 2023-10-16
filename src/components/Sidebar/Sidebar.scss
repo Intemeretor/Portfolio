@@ -7,7 +7,7 @@
 	height: 100vh;
 	max-width: 300px;
 	width: 50%;
-	background: linear-gradient(45deg, #404041, rgb(27, 26, 26));
+	background: linear-gradient(180deg, #000000, rgb(0, 0, 0));
 	box-shadow: 5px 10px 10px rgb(51, 50, 50);
 	right: 0;
 	top: 0;
@@ -30,6 +30,11 @@
 		position: relative;
 		height: 25px;
 		margin: 0px 0px 15px 0px;
+		h4 {
+			font-family: "Tilt Neon";
+			color: rgb(126, 255, 169);
+			font-size: 24px;
+		}
 		.cross {
 			cursor: pointer;
 			position: relative;

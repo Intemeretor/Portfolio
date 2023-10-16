@@ -1,6 +1,7 @@
 .todo {
 	margin: 100px 0px 0px 0px;
 	padding: 10px 10px;
+	position: relative;
 	&__title {
 		text-align: center;
 		color: white;
@@ -10,7 +11,30 @@
 
 	&__container {
 	}
-	.todo__item {
+	&__control {
+		height: 50%;
+		background-color: rgba(0, 0, 0, 0.342);
+		position: fixed;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+	&__control-button {
+		padding: 10px 5px;
+		background-color: #0446be;
+		color: white;
+		font-size: 20px;
+		border: 1px solid #ffffff;
+	}
+	&__row {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	&__item {
 		max-width: 550px;
 		margin: 0 auto;
 		width: 100%;

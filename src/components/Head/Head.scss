@@ -29,6 +29,9 @@
 		font-size: 30px;
 		font-weight: 500;
 		color: rgba(255, 255, 255, 0.521);
+		&:hover {
+			color: rgba(255, 255, 255, 0.74);
+		}
 	}
 	&__projects {
 		flex: 1 1 auto;
@@ -75,7 +78,7 @@
 		}
 	}
 	&.isDark {
-		box-shadow: 0 5px 10px #7e7c7c;
+		box-shadow: 0 5px 10px #706e6e;
 		.darkmode {
 			&__button {
 				background-color: white;

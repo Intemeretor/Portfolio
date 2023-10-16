@@ -2,12 +2,14 @@ import React from 'react'
 import TodoList from './TodoList';
 import { useState, useEffect } from 'react';
 
-export default function TodoItem({ darkMode } = props) {
+export default function TodoItem({ darkMode, cardId } = props) {
 	const [newTodo, setNewTodo] = useState({
 		text: '',
 		editable: false,
 	});
 	const [todo, setTodo] = useState([]);
+
+
 
 	useEffect(() => {
 		const data = JSON.parse(localStorage.getItem('todos'));
@@ -89,8 +91,11 @@ export default function TodoItem({ darkMode } = props) {
 		changeEditable={changeEditableStatus}
 	/>);
 	return (
-		<div className={`todo__item ${darkMode ? 'isDark' : ""}`}>
-			<h2 className='todo__title'>{`Todo #1`}</h2>
+		<div
+			className={`todo__item ${darkMode ? 'isDark' : ""}`}
+
+		>
+			<h2 className='todo__title'>{`Card ${cardId}`}</h2>
 			<form
 				action=""
 				className="todo__form"

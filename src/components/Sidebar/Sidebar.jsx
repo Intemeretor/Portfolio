@@ -6,6 +6,7 @@ export default function Sidebar({ sideActive, sidebarHandler } = props) {
 	return (
 		<aside className={`sidebar ${sideActive ? "active" : ""}`}>
 			<div className="sidebar__head">
+				<h4 className='sidebar__title'>My lovely projects:</h4>
 				<span onClick={sidebarHandler} className='cross'></span>
 			</div>
 
