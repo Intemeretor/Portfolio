@@ -12,6 +12,7 @@ export default function Todo({ darkMode } = props) {
 	function createTodoCard() {
 		setTodoCards(prev => [...prev, <TodoItem darkMode={darkMode} cardId={todoCards.length + 1} />])
 	}
+	console.log(todoCards);
 	// const cards = todoCards.map((item,index) => item)
 	return (
 
