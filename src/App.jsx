@@ -25,8 +25,8 @@ function App() {
 
 			<Head setDarkMode={setDarkMode} sidebarHandler={sidebarHandler} darkMode={darkMode} />
 			<Routes>
-				<Route path='/Portfolio/Home' element={<Home />} />
-				<Route path='/Portfolio/Todo' element={<Todo darkMode={darkMode} />} />
+				<Route path='/' element={<Home />} />
+				<Route path='/Todo' element={<Todo darkMode={darkMode} />} />
 			</Routes>
 
 			<Sidebar sidebarHandler={sidebarHandler} sideActive={sideActive} />
