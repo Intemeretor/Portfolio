@@ -1,16 +1,16 @@
-export default function TodoList({ id, task, dlt, editable, edit, changeEditable } = props) {
+export default function TodoList({ changeTodo, id, task, editable } = props) {
 
 	return (
 		<li className={`todo__element ${editable ? 'edit' : ''}`}>
-			<div className="todo__line">
+			<form className="todo__line" onSubmit={(e) => changeTodo(e, "statusChange", id)}>
 				{editable
-					? <input className="todo__edit" onChange={(e) => edit(e, id)} value={task} type="text" />
+					? <input className="todo__edit" onChange={(e) => changeTodo(e, "textChange", id)} value={task} type="text" />
 					: <div className="todo__task"><p>{task}</p></div>}
-			</div>
+			</form>
 
 			<div className="todo__btns">
-				<button onClick={() => changeEditable(id)} className="edit-btn todo__btn"><span>EDIT</span></button>
-				<button onClick={() => dlt(id)} className="alarm-btn todo__btn"><span></span></button>
+				<button onClick={(e) => changeTodo(e, "statusChange", id)} className="edit-btn todo__btn"><span>EDIT</span></button>
+				<button onClick={(e) => changeTodo(e, "delete", id)} className="alarm-btn todo__btn"><span></span></button>
 			</div>
 
 		</li>

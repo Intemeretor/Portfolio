@@ -41,82 +41,62 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 			});
 		}
 	}
-	function deleteTodo(id) {
-		setTodo(prev => {
-			let newArr = [];
-			for (let i = 0; i < prev.length; i++) {
-				if (i != id) {
-					newArr.push(prev[i]);
-				}
-			}
-			return newArr
-		})
-	}
-	function editTodo(e, id) {
-		setTodo(prev => {
-			let newArr = [];
-			for (let i = 0; i < prev.length; i++) {
-				if (i != id) {
-					newArr.push(prev[i]);
-				} else {
-					prev[i] = { ...prev[i], text: e.target.value }
-					newArr.push(prev[i]);
-				}
-			}
-			return newArr
-		})
-	}
-	function changeEditableStatus(id) {
 
-		setTodo(prev => {
-
-			let newArr = [];
-			for (let i = 0; i < prev.length; i++) {
-				if (i != id) {
-					newArr.push(prev[i]);
-				} else {
-					let changed = { ...prev[i], editable: !prev[i].editable }
-					newArr.push(changed);
-				}
-			}
-			return newArr
-		})
-	}
-	function changeNameEditableStatus(e, id) {
+	function changeTodo(e, changeType, id) {
 		e.preventDefault();
-		setTodoCards(prev => (
-			{ ...prev, editable: !prev.editable }
-		))
+
+		setTodo(prev => {
+			let newArr = [];
+			for (let i = 0; i < prev.length; i++) {
+				if (i != id) {
+					newArr.push(prev[i]);
+				}
+				else {
+					let edited;
+					switch (changeType) {
+						case "textChange":
+							edited = { ...prev[i], text: e.target.value };
+							newArr.push(edited);
+							break;
+						case "statusChange":
+							edited = { ...prev[i], editable: !prev[i].editable };
+							newArr.push(edited);
+							break;
+						case "delete":
+							break;
+					}
+
+				}
+			}
+			return newArr
+		})
+
 	}
-	function changeCardName(e) {
-		setCardOptions(prev => (
-			{ ...prev, name: e.target.value }
-		))
-	}
+
+
 	let list = todo.map((item, index) => <TodoList
 		key={index}
 		id={index}
 		task={item.text}
-		dlt={deleteTodo}
-		edit={editTodo}
+		changeTodo={changeTodo}
 		editable={item.editable}
-		changeEditable={changeEditableStatus}
+
 	/>);
 
 	return (
 		<div className={`todo__item ${darkMode ? 'isDark' : ""}`}>
-			<form onSubmit={(e) => changeCard(e, "statusChange", cardId)} className="todo__head">
+			<span onClick={(e) => changeCard(e, "delete", cardId)} className='cross'></span>
+			<form
+				onSubmit={(e) => changeCard(e, "statusChange", cardId)}
+				className={`todo__head ${editableName ? "edit" : ''}`} >
 				{!editableName
 					? <h2 className='todo__title'>
 						<span>{name}</span>
 						<span onClick={(e) => changeCard(e, "statusChange", cardId)} className="ico">
-							<svg fill="#000000" width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.7,5.2a1.024,1.024,0,0,1,0,1.448L18.074,9.276l-3.35-3.35L17.35,3.3a1.024,1.024,0,0,1,1.448,0Zm-4.166,5.614-3.35-3.35L4.675,15.975,3,21l5.025-1.675Z" /></svg>
+							<svg fill="white" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.7,5.2a1.024,1.024,0,0,1,0,1.448L18.074,9.276l-3.35-3.35L17.35,3.3a1.024,1.024,0,0,1,1.448,0Zm-4.166,5.614-3.35-3.35L4.675,15.975,3,21l5.025-1.675Z" /></svg>
 						</span>
 					</h2>
 					: <input className="todo__edit" onChange={(e) => changeCard(e, "nameChange", cardId)} value={name} type="text" />}
-
-
-				<span onClick={(e) => changeCard(e, "delete", cardId)} className='cross'></span>
 			</form>
 			<div className="todo__body">
 				<form

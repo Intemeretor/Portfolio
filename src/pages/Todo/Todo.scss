@@ -2,30 +2,6 @@
 	margin: 100px 0px 0px 0px;
 	padding: 10px 10px;
 	position: relative;
-	&__head {
-		position: relative;
-		.cross {
-			&::before {
-				transform: translate(-50%, 0) rotate(45deg);
-			}
-			&::after {
-				transform: translate(-50%, 0) rotate(135deg);
-			}
-		}
-	}
-	&__title {
-		text-align: center;
-		color: white;
-		font-size: 2rem;
-		margin: 0px 0px 40px 0px;
-		display: flex;
-		gap: 20px;
-		justify-content: center;
-		align-items: center;
-		span {
-			word-break: break-all;
-		}
-	}
 
 	&__container {
 	}
@@ -53,16 +29,51 @@
 		gap: 20px;
 	}
 	&__item {
+		position: relative;
 		max-width: 550px;
 		margin: 0 auto;
 		width: 100%;
 		background-color: #2c2b2b;
 		transition: all 0.5s ease 0s;
-		padding: 10px;
+		padding: 20px;
 		border-radius: 5px;
 		box-shadow: 10px 10px 15px #000000;
 		&.isDark {
 			background-color: #464444;
+		}
+	}
+	&__head {
+		position: relative;
+		&.edit {
+			background-color: #292828;
+			box-shadow: inset 6px 6px 14px -6px rgba(0, 0, 0, 0.5);
+		}
+	}
+	&__title {
+		font-family: "Tilt Neon";
+		text-align: center;
+		color: white;
+		font-size: 2rem;
+		margin: 0px 0px 40px 0px;
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+		align-items: center;
+		span {
+			word-break: break-all;
+		}
+		.ico {
+			cursor: pointer;
+			padding: 4px;
+			&:hover {
+				svg {
+					fill: rgb(4, 206, 4);
+				}
+			}
+			svg {
+				transform: translateY(4px);
+				transition: all 0.5s ease 0s;
+			}
 		}
 	}
 	&__body {
@@ -202,6 +213,14 @@
 			&::after {
 				transform: translateY(-50%) rotate(-45deg);
 			}
+		}
+	}
+	.cross {
+		&::before {
+			transform: translate(0%, -50%) rotate(45deg);
+		}
+		&::after {
+			transform: translate(0%, -50%) rotate(135deg);
 		}
 	}
 }

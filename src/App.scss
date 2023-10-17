@@ -35,16 +35,26 @@
 	margin: 0 auto;
 }
 .cross {
+	transition: all 1s ease 0s;
+	&:hover {
+		&::after,
+		&::before {
+			background-color: #b90660;
+			transition: all 0.1s ease 0s;
+		}
+	}
+
 	cursor: pointer;
 	position: relative;
 	width: 20px;
 	height: 20px;
 	position: absolute;
-	top: 0px;
-	right: 0px;
+	top: 2px;
+	right: 2px;
 	&::after,
 	&::before {
 		content: "";
+
 		transition: all 0.1s ease 0s;
 		position: absolute;
 		top: 50%;
