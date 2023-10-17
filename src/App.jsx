@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Route, Routes, Router } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.scss'
 
 import Head from './components/Head/Head';
@@ -28,6 +28,7 @@ function App() {
 			<Routes>
 				<Route path='/Portfolio/' element={<Home />} />
 				<Route path='/Portfolio/todo' element={<Todo darkMode={darkMode} />} />
+				<Route path='*' element={<Navigate to={'/Portfolio/'} />} />
 			</Routes>
 
 
