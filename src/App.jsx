@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Router } from 'react-router-dom';
 import './App.scss'
 
 import Head from './components/Head/Head';
@@ -24,10 +24,13 @@ function App() {
 		>
 
 			<Head setDarkMode={setDarkMode} sidebarHandler={sidebarHandler} darkMode={darkMode} />
+
 			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/Todo' element={<Todo darkMode={darkMode} />} />
+				<Route path='/Portfolio/' element={<Home />} />
+				<Route path='/Portfolio/todo' element={<Todo darkMode={darkMode} />} />
 			</Routes>
+
+
 
 			<Sidebar sidebarHandler={sidebarHandler} sideActive={sideActive} />
 		</main>

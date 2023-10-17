@@ -2,7 +2,7 @@ import React from 'react'
 import TodoList from './TodoList';
 import { useState, useEffect } from 'react';
 
-export default function TodoItem({ darkMode, cardId } = props) {
+export default function TodoItem({ darkMode, cardId, active } = props) {
 	const [newTodo, setNewTodo] = useState({
 		text: '',
 		editable: false,
