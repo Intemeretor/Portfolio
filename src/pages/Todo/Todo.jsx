@@ -19,11 +19,64 @@ export default function Todo({ darkMode } = props) {
 	}, [todoCards]);
 
 	function createTodoCard() {
-		setTodoCards(prev => [...prev, { active: false, }]);
+		setTodoCards(prev => [...prev, {
+			name: 'New card',
+			editable: false
+		}]);
+	}
+
+	function deleteTodoCard(id) {
+
+		setTodoCards(prev => {
+			let newArr = [];
+			for (let i = 0; i < prev.length; i++) {
+				if (i != id) {
+					newArr.push(prev[i]);
+				}
+			}
+			return newArr
+		})
+	}
+	function changeCard(e, changeType, id) {
+		e.preventDefault();
+
+		setTodoCards(prev => {
+			let newArr = [];
+			for (let i = 0; i < prev.length; i++) {
+				if (i != id) {
+					newArr.push(prev[i]);
+				}
+				else {
+					let edited;
+					switch (changeType) {
+						case "nameChange":
+							edited = { ...prev[i], name: e.target.value };
+							newArr.push(edited);
+							break;
+						case "statusChange":
+							edited = { ...prev[i], editable: !prev[i].editable };
+							newArr.push(edited);
+							break;
+						case "delete":
+							break;
+					}
+
+				}
+			}
+			return newArr
+		})
+
 	}
 	//
 
-	let cards = todoCards.map((item, index) => <TodoItem active={item.active} darkMode={darkMode} cardId={index} key={index} />)
+	let cards = todoCards.map((item, index) => <TodoItem
+		changeCard={changeCard}
+		deleteTodoCard={deleteTodoCard}
+		name={item.name} editableName={item.editable}
+		darkMode={darkMode}
+		cardId={index}
+		key={index}
+	/>)
 	return (
 
 		<section className='todo'>
