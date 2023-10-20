@@ -21,7 +21,8 @@ export default function Todo({ darkMode } = props) {
 	function createTodoCard() {
 		setTodoCards(prev => [...prev, {
 			name: 'New card',
-			editable: false
+			editable: false,
+			activeCard: true
 		}]);
 	}
 

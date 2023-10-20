@@ -91,7 +91,8 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 		moved: false,
 		startPosition: { x: 0, y: 0 },
 		currentPosition: { x: 0, y: 0 },
-		distance: { x: 0, y: 0 }
+		distance: { x: 0, y: 0 },
+		active: false
 	});
 
 
@@ -105,6 +106,7 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 				x: e.clientX,
 				y: e.clientY,
 			},
+			active: true
 		}))
 
 	}
@@ -117,23 +119,25 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 				currentPosition: {
 					x: e.clientX - cardPosition.startPosition.x + prev.distance.x,
 					y: e.clientY - cardPosition.startPosition.y + prev.distance.y,
+				},
 
-				}
+
 			}))
 
 		}
 	}
 
 	function stopDragging(e) {
-		console.log("stopped");
+		console.log(e.clientX);
 		setCardPosition(prev => ({
 			...prev,
 			canDrag: false,
-			moved: true,
 			distance: {
-				x: prev.currentPosition.x,
-				y: prev.currentPosition.y,
-			}
+				x: cardPosition.currentPosition.x,
+				y: cardPosition.currentPosition.y,
+			},
+			moved: true,
+			active: false
 		}))
 	}
 
@@ -142,7 +146,14 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 		<div
 			className={`todo__item ${darkMode ? 'isDark' : ""}`}
 			onMouseMove={(e) => dragging(e)}
-			style={{ position: cardPosition.moved ? "absolute" : "relative", top: `${cardPosition.currentPosition.y}px`, left: `${cardPosition.currentPosition.x}px` }}
+			onMouseUp={(e) => stopDragging(e)}
+			style={{
+				position: cardPosition.moved ? "absolute" : "relative",
+				top: `${cardPosition.currentPosition.y}px`,
+				left: `${cardPosition.currentPosition.x}px`,
+				zIndex: cardPosition.active ? 50 : 1,
+
+			}}
 		>
 
 
@@ -151,8 +162,7 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 
 			<div
 				className="todo__head"
-				onMouseUp={(e) => stopDragging(e)}
-
+				onMouseUp={(e) => stopDragging(e, "head")}
 				onMouseDown={(e) => startDragging(e)}
 				ref={itemHeadRef}
 
@@ -179,7 +189,7 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 					<input
 						onFocus={(e) => hidePlaceholder(e)}
 						onBlur={(e) => showPlaceholder(e)}
-						placeholder='What do you need to do?'
+						placeholder='Todo?'
 						onChange={(e) => newTodoHandler(e)}
 						className='todo__input'
 						type="text"
