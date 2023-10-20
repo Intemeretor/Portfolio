@@ -88,7 +88,7 @@ export default function Todo({ darkMode } = props) {
 				</div>
 
 				<div className="todo__row">
-					{cards ? cards : ''}
+					{cards}
 				</div>
 
 			</div>

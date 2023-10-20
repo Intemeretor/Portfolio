@@ -2,8 +2,9 @@
 	margin: 100px 0px 0px 0px;
 	padding: 10px 10px;
 	position: relative;
-
+	min-height: 100vh;
 	&__container {
+		max-width: none;
 	}
 	&__control {
 		height: 50%;
@@ -34,8 +35,7 @@
 		margin: 0 auto;
 		width: 100%;
 		background-color: #2c2b2b;
-		transition: all 0.5s ease 0s;
-		padding: 20px;
+
 		border-radius: 5px;
 		box-shadow: 10px 10px 15px #000000;
 		&.isDark {
@@ -43,7 +43,14 @@
 		}
 	}
 	&__head {
+		user-select: none;
+		height: 30px;
+		cursor: move;
 		position: relative;
+		background-color: #ffffff27;
+	}
+	&__nameform {
+		margin: 0px 0px 30px 0px;
 		&.edit {
 			background-color: #292828;
 			box-shadow: inset 6px 6px 14px -6px rgba(0, 0, 0, 0.5);
@@ -54,7 +61,6 @@
 		text-align: center;
 		color: white;
 		font-size: 2rem;
-		margin: 0px 0px 40px 0px;
 		display: flex;
 		gap: 20px;
 		justify-content: center;
@@ -77,7 +83,7 @@
 		}
 	}
 	&__body {
-		padding: 30px;
+		padding: 20px;
 	}
 	&__form {
 		margin: 0px 0px 30px 0px;
@@ -216,6 +222,9 @@
 		}
 	}
 	.cross {
+		top: 50%;
+		height: 100%;
+		transform: translateY(-50%);
 		&::before {
 			transform: translate(0%, -50%) rotate(45deg);
 		}

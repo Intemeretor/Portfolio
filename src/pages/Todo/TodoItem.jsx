@@ -1,6 +1,6 @@
 import React from 'react'
 import TodoList from './TodoList';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function TodoItem({ changeCard, darkMode, cardId, editableName, name } = props) {
 	const [newTodo, setNewTodo] = useState({
@@ -8,6 +8,8 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 		editable: false,
 	});
 	const [todo, setTodo] = useState([]);
+	const itemHeadRef = useRef();
+
 
 
 
@@ -19,6 +21,7 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 	useEffect(() => {
 		localStorage.setItem(`todos${cardId}`, JSON.stringify(todo));
 	}, [todo]);
+
 
 
 
@@ -83,22 +86,91 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 
 	/>);
 
+	const [cardPosition, setCardPosition] = useState({
+		canDrag: false,
+		moved: false,
+		startPosition: { x: 0, y: 0 },
+		currentPosition: { x: 0, y: 0 },
+		distance: { x: 0, y: 0 }
+	});
+
+
+	function startDragging(e) {
+
+
+		setCardPosition(prev => ({
+			...prev,
+			canDrag: true,
+			startPosition: {
+				x: e.clientX,
+				y: e.clientY,
+			},
+		}))
+
+	}
+
+	function dragging(e) {
+		if (cardPosition.canDrag) {
+			console.log(e.clientX);
+			setCardPosition(prev => ({
+				...prev,
+				currentPosition: {
+					x: e.clientX - cardPosition.startPosition.x + prev.distance.x,
+					y: e.clientY - cardPosition.startPosition.y + prev.distance.y,
+
+				}
+			}))
+
+		}
+	}
+
+	function stopDragging(e) {
+		console.log("stopped");
+		setCardPosition(prev => ({
+			...prev,
+			canDrag: false,
+			moved: true,
+			distance: {
+				x: prev.currentPosition.x,
+				y: prev.currentPosition.y,
+			}
+		}))
+	}
+
+
 	return (
-		<div className={`todo__item ${darkMode ? 'isDark' : ""}`}>
-			<span onClick={(e) => changeCard(e, "delete", cardId)} className='cross'></span>
-			<form
-				onSubmit={(e) => changeCard(e, "statusChange", cardId)}
-				className={`todo__head ${editableName ? "edit" : ''}`} >
-				{!editableName
-					? <h2 className='todo__title'>
-						<span>{name}</span>
-						<span onClick={(e) => changeCard(e, "statusChange", cardId)} className="ico">
-							<svg fill="white" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.7,5.2a1.024,1.024,0,0,1,0,1.448L18.074,9.276l-3.35-3.35L17.35,3.3a1.024,1.024,0,0,1,1.448,0Zm-4.166,5.614-3.35-3.35L4.675,15.975,3,21l5.025-1.675Z" /></svg>
-						</span>
-					</h2>
-					: <input className="todo__edit" onChange={(e) => changeCard(e, "nameChange", cardId)} value={name} type="text" />}
-			</form>
+		<div
+			className={`todo__item ${darkMode ? 'isDark' : ""}`}
+			onMouseMove={(e) => dragging(e)}
+			style={{ position: cardPosition.moved ? "absolute" : "relative", top: `${cardPosition.currentPosition.y}px`, left: `${cardPosition.currentPosition.x}px` }}
+		>
+
+
+			<div>{cardPosition.currentPosition.x}</div>
+
+
+			<div
+				className="todo__head"
+				onMouseUp={(e) => stopDragging(e)}
+
+				onMouseDown={(e) => startDragging(e)}
+				ref={itemHeadRef}
+
+			>
+				<span onClick={(e) => changeCard(e, "delete", cardId)} className='cross'></span>
+			</div>
+
 			<div className="todo__body">
+				<form onSubmit={(e) => changeCard(e, "statusChange", cardId)} className={`todo__nameform ${editableName ? "edit" : ''}`} >
+					{!editableName
+						? <h2 className='todo__title'>
+							<span>{name}</span>
+							<span onClick={(e) => changeCard(e, "statusChange", cardId)} className="ico">
+								<svg fill="white" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.7,5.2a1.024,1.024,0,0,1,0,1.448L18.074,9.276l-3.35-3.35L17.35,3.3a1.024,1.024,0,0,1,1.448,0Zm-4.166,5.614-3.35-3.35L4.675,15.975,3,21l5.025-1.675Z" /></svg>
+							</span>
+						</h2>
+						: <input className="todo__edit" onChange={(e) => changeCard(e, "nameChange", cardId)} value={name} type="text" />}
+				</form>
 				<form
 					action=""
 					className="todo__form"
