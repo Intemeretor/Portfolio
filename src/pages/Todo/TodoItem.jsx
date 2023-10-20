@@ -2,7 +2,7 @@ import React from 'react'
 import TodoList from './TodoList';
 import { useState, useEffect, useRef } from 'react';
 
-export default function TodoItem({ changeCard, darkMode, cardId, editableName, name } = props) {
+export default function TodoItem({ cardIndex, changeCard, darkMode, cardId, editableName, name } = props) {
 	const [newTodo, setNewTodo] = useState({
 		text: '',
 		editable: false,
@@ -16,7 +16,7 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 
 	useEffect(() => {
 		const data = JSON.parse(localStorage.getItem(`todos${cardId}`));
-		setTodo(data || []); // Встановлюємо пустий масив, якщо дані відсутні
+		setTodo(data || []);
 	}, []);
 	useEffect(() => {
 		localStorage.setItem(`todos${cardId}`, JSON.stringify(todo));
@@ -106,21 +106,20 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 				x: e.clientX,
 				y: e.clientY,
 			},
-			active: true
+
 		}))
 
 	}
 
 	function dragging(e) {
 		if (cardPosition.canDrag) {
-			console.log(e.clientX);
 			setCardPosition(prev => ({
 				...prev,
 				currentPosition: {
 					x: e.clientX - cardPosition.startPosition.x + prev.distance.x,
 					y: e.clientY - cardPosition.startPosition.y + prev.distance.y,
 				},
-
+				active: true
 
 			}))
 
@@ -128,7 +127,6 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 	}
 
 	function stopDragging(e) {
-		console.log(e.clientX);
 		setCardPosition(prev => ({
 			...prev,
 			canDrag: false,
@@ -137,7 +135,7 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 				y: cardPosition.currentPosition.y,
 			},
 			moved: true,
-			active: false
+
 		}))
 	}
 
@@ -147,19 +145,16 @@ export default function TodoItem({ changeCard, darkMode, cardId, editableName, n
 			className={`todo__item ${darkMode ? 'isDark' : ""}`}
 			onMouseMove={(e) => dragging(e)}
 			onMouseUp={(e) => stopDragging(e)}
+			onMouseDown={(e) => changeCard(e, "changeIndex", cardId)}
 			style={{
 				position: cardPosition.moved ? "absolute" : "relative",
 				top: `${cardPosition.currentPosition.y}px`,
 				left: `${cardPosition.currentPosition.x}px`,
-				zIndex: cardPosition.active ? 50 : 1,
+				zIndex: cardIndex
+
 
 			}}
 		>
-
-
-			<div>{cardPosition.currentPosition.x}</div>
-
-
 			<div
 				className="todo__head"
 				onMouseUp={(e) => stopDragging(e, "head")}

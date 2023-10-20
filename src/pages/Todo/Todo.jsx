@@ -11,7 +11,7 @@ export default function Todo({ darkMode } = props) {
 
 	useEffect(() => {
 		const data = JSON.parse(localStorage.getItem(`todoCards`));
-		setTodoCards(data || []); // Встановлюємо пустий масив, якщо дані відсутні
+		setTodoCards(data || []);
 	}, []);
 	useEffect(() => {
 		localStorage.setItem(`todoCards`, JSON.stringify(todoCards));
@@ -22,7 +22,7 @@ export default function Todo({ darkMode } = props) {
 		setTodoCards(prev => [...prev, {
 			name: 'New card',
 			editable: false,
-			activeCard: true
+			cardIndex: 0
 		}]);
 	}
 
@@ -45,7 +45,9 @@ export default function Todo({ darkMode } = props) {
 			let newArr = [];
 			for (let i = 0; i < prev.length; i++) {
 				if (i != id) {
-					newArr.push(prev[i]);
+
+					newArr.push({ ...prev[i], cardIndex: prev[i].cardIndex != 0 ? prev[i].cardIndex - 1 : prev[i].cardIndex });
+					// newArr.push(prev[i]);
 				}
 				else {
 					let edited;
@@ -56,6 +58,10 @@ export default function Todo({ darkMode } = props) {
 							break;
 						case "statusChange":
 							edited = { ...prev[i], editable: !prev[i].editable };
+							newArr.push(edited);
+							break;
+						case "changeIndex":
+							edited = { ...prev[i], cardIndex: prev.length + 100 };
 							newArr.push(edited);
 							break;
 						case "delete":
@@ -77,7 +83,10 @@ export default function Todo({ darkMode } = props) {
 		darkMode={darkMode}
 		cardId={index}
 		key={index}
+		cardIndex={item.cardIndex}
 	/>)
+
+
 	return (
 
 		<section className='todo'>
