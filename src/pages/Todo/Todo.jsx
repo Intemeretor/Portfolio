@@ -2,13 +2,13 @@
 import React from 'react'
 import './Todo.scss'
 import TodoItem from './TodoItem';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, } from 'react';
 
 export default function Todo({ darkMode } = props) {
 
 
 	const [todoCards, setTodoCards] = useState([]);
-
+	const [currentCard, setCurrentCard] = useState(-1);
 	useEffect(() => {
 		const data = JSON.parse(localStorage.getItem(`todoCards`));
 		setTodoCards(data || []);
@@ -18,9 +18,18 @@ export default function Todo({ darkMode } = props) {
 
 	}, [todoCards]);
 
+	// useEffect(() => {
+	// 	document.addEventListener('mousemove', (e) => changeCard(e, "dragging", currentCard));
+
+	// 	const cleanUp = () => {
+	// 		document.removeEventListener('mousemove', (e) => changeCard(e, "dragging", currentCard));
+	// 	}
+	// 	return cleanUp
+	// },)
+
 	function createTodoCard() {
 		setTodoCards(prev => [...prev, {
-			name: 'New card',
+			name: 'New card' + todoCards.length,
 			editable: false,
 			cardIndex: 0,
 			cardPosition: {
@@ -37,19 +46,25 @@ export default function Todo({ darkMode } = props) {
 
 	function changeCard(e, changeType, id) {
 		e.preventDefault();
+
 		setTodoCards(prev => {
 			let newArr = [];
 			for (let i = 0; i < prev.length; i++) {
 				if (i != id) {
-					newArr.push({ ...prev[i], cardIndex: prev[i].cardIndex != 0 ? prev[i].cardIndex - 1 : prev[i].cardIndex });
-					// newArr.push(prev[i]);
+					if (changeType == "dragging") {
+						newArr.push(prev[i]);
+					} else {
+						newArr.push({ ...prev[i], cardIndex: prev[i].cardIndex != 0 ? prev[i].cardIndex - 1 : prev[i].cardIndex });
+					}
+
+
 				}
 				else {
+
 					let edited;
-					edited = { ...prev[i], cardIndex: prev.length + 100 };
 					switch (changeType) {
 						case "nameChange":
-							edited = { ...prev[i], name: e.target.value };
+							edited = { ...prev[i], name: e.target.value, };
 							newArr.push(edited);
 							break;
 						case "statusChange":
@@ -61,8 +76,11 @@ export default function Todo({ darkMode } = props) {
 							newArr.push(edited);
 							break;
 						case "startDragging":
+							setCurrentCard(id);
 							edited = {
-								...prev[i], cardPosition: {
+								...prev[i],
+								cardIndex: 100,
+								cardPosition: {
 									...prev[i].cardPosition,
 									canDrag: true,
 									startPosition: {
@@ -75,6 +93,7 @@ export default function Todo({ darkMode } = props) {
 							break;
 						case "dragging":
 							if (prev[i].cardPosition.canDrag) {
+								console.log(id)
 
 								edited = {
 									...prev[i], cardPosition: {
@@ -112,35 +131,26 @@ export default function Todo({ darkMode } = props) {
 			return newArr
 		})
 
-	}
-	//---------------------------------------------
-	// const [cardPosition, setCardPosition] = useState({
-	// 	canDrag: false,
-	// 	moved: false,
-	// 	startPosition: { x: 0, y: 0 },
-	// 	currentPosition: { x: 0, y: 0 },
-	// 	distance: { x: 0, y: 0 },
-	// 	active: false
-	// });
-	//-----------------------------------------
+	};
 
 	let cards = todoCards.map((item, index) => <TodoItem
 		changeCard={changeCard}
 		setTodoCards={setTodoCards}
-		// deleteTodoCard={deleteTodoCard}
 		card={item}
-		// name={item.name} 
-		// editableName={item.editable}
 		darkMode={darkMode}
 		cardId={index}
 		key={index}
-	// cardIndex={item.cardIndex}
-	/>)
+	/>);
 
-
+	function checkIt(e) {
+		console.log(e.clientX);
+	};
 	return (
 
-		<section className='todo'>
+		<section className='todo'
+			onMouseMove={(e) => changeCard(e, "dragging", currentCard)}
+			onMouseUp={(e) => changeCard(e, "stopDragging", currentCard)}
+		>
 			<div className="todo__container container">
 				<div className="todo__control">
 					<button onClick={createTodoCard} className="todo__control-button">Create card</button>

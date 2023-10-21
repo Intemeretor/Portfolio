@@ -2,7 +2,7 @@ import React from 'react'
 import TodoList from './TodoList';
 import { useState, useEffect, useRef } from 'react';
 
-export default function TodoItem({ card, cardIndex, changeCard, darkMode, cardId, editableName, name } = props) {
+export default function TodoItem({ card, changeCard, darkMode, cardId } = props) {
 	const [newTodo, setNewTodo] = useState({
 		text: '',
 		editable: false,
@@ -71,59 +71,6 @@ export default function TodoItem({ card, cardIndex, changeCard, darkMode, cardId
 
 	}
 
-
-
-	// const [cardPosition, setCardPosition] = useState({
-	// 	canDrag: false,
-	// 	moved: false,
-	// 	startPosition: { x: 0, y: 0 },
-	// 	currentPosition: { x: 0, y: 0 },
-	// 	distance: { x: 0, y: 0 },
-	// 	active: false
-	// });
-
-
-	// function startDragging(e) {
-	// 	setCardPosition(prev => ({
-	// 		...prev,
-	// 		canDrag: true,
-	// 		startPosition: {
-	// 			x: e.clientX,
-	// 			y: e.clientY,
-	// 		},
-	// 	}))
-	// 	changeCard(e, "changeIndex", cardId);
-	// }
-
-	// function dragging(e) {
-	// 	if (card.cardPosition.canDrag) {
-	// 		setCardPosition(prev => ({
-	// 			...prev,
-	// 			currentPosition: {
-	// 				x: e.clientX - card.cardPosition.startPosition.x + prev.distance.x,
-	// 				y: e.clientY - card.cardPosition.startPosition.y + prev.distance.y,
-	// 			},
-	// 			active: true
-
-	// 		}))
-
-	// 	}
-	// }
-
-	// function stopDragging(e) {
-	// 	setCardPosition(prev => ({
-	// 		...prev,
-	// 		canDrag: false,
-	// 		distance: {
-	// 			x: card.cardPosition.currentPosition.x,
-	// 			y: card.cardPosition.currentPosition.y,
-	// 		},
-	// 		moved: true,
-
-	// 	}))
-	// }
-
-
 	let list = todo.map((item, index) => <TodoList
 		key={index}
 		id={index}
@@ -134,9 +81,8 @@ export default function TodoItem({ card, cardIndex, changeCard, darkMode, cardId
 	/>);
 	return (
 		<div
+			id={cardId}
 			className={`todo__item ${darkMode ? 'isDark' : ""}`}
-			onMouseMove={(e) => changeCard(e, "dragging", cardId)}
-			onMouseUp={(e) => changeCard(e, "stopDragging", cardId)}
 			style={{
 				position: card.cardPosition.moved ? "absolute" : "relative",
 				top: `${card.cardPosition.currentPosition.y}px`,
@@ -146,7 +92,6 @@ export default function TodoItem({ card, cardIndex, changeCard, darkMode, cardId
 
 			<div
 				className="todo__head"
-				onMouseUp={(e) => changeCard(e, "stopDragging", cardId)}
 				onMouseDown={(e) => changeCard(e, "startDragging", cardId)}
 
 			>
