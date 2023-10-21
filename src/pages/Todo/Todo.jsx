@@ -9,6 +9,7 @@ export default function Todo({ darkMode } = props) {
 
 	const [todoCards, setTodoCards] = useState([]);
 	const [currentCard, setCurrentCard] = useState(-1);
+	const [cardCounter, setCardCounter] = useState(0);
 	useEffect(() => {
 		const data = JSON.parse(localStorage.getItem(`todoCards`));
 		setTodoCards(data || []);
@@ -18,18 +19,11 @@ export default function Todo({ darkMode } = props) {
 
 	}, [todoCards]);
 
-	// useEffect(() => {
-	// 	document.addEventListener('mousemove', (e) => changeCard(e, "dragging", currentCard));
-
-	// 	const cleanUp = () => {
-	// 		document.removeEventListener('mousemove', (e) => changeCard(e, "dragging", currentCard));
-	// 	}
-	// 	return cleanUp
-	// },)
 
 	function createTodoCard() {
 		setTodoCards(prev => [...prev, {
-			name: 'New card' + todoCards.length,
+			name: `New card ${cardCounter}`,
+			cardId: cardCounter,
 			editable: false,
 			cardIndex: 0,
 			cardPosition: {
@@ -41,6 +35,7 @@ export default function Todo({ darkMode } = props) {
 				active: false
 			}
 		}]);
+		setCardCounter(prev => prev + 1);
 	}
 
 
@@ -87,14 +82,14 @@ export default function Todo({ darkMode } = props) {
 										x: e.clientX,
 										y: e.clientY,
 									},
+
+
 								}
 							};
 							newArr.push(edited);
 							break;
 						case "dragging":
 							if (prev[i].cardPosition.canDrag) {
-								console.log(id)
-
 								edited = {
 									...prev[i], cardPosition: {
 										...prev[i].cardPosition,
@@ -102,7 +97,8 @@ export default function Todo({ darkMode } = props) {
 											x: e.clientX - prev[i].cardPosition.startPosition.x + prev[i].cardPosition.distance.x,
 											y: e.clientY - prev[i].cardPosition.startPosition.y + prev[i].cardPosition.distance.y,
 										},
-										active: true
+										active: true,
+
 									}
 								}
 								newArr.push(edited);
@@ -142,9 +138,11 @@ export default function Todo({ darkMode } = props) {
 		key={index}
 	/>);
 
-	function checkIt(e) {
-		console.log(e.clientX);
-	};
+	useEffect(() => {
+		let arr = [1, 2, 3, 4];
+		console.log(arr);
+		return
+	}, [])
 	return (
 
 		<section className='todo'

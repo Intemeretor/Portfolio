@@ -79,12 +79,15 @@ export default function TodoItem({ card, changeCard, darkMode, cardId } = props)
 		editable={item.editable}
 
 	/>);
+
+
+
 	return (
 		<div
 			id={cardId}
 			className={`todo__item ${darkMode ? 'isDark' : ""}`}
 			style={{
-				position: card.cardPosition.moved ? "absolute" : "relative",
+				position: card.cardPosition.moved ? "relative" : "relative",
 				top: `${card.cardPosition.currentPosition.y}px`,
 				left: `${card.cardPosition.currentPosition.x}px`,
 				zIndex: card.cardIndex

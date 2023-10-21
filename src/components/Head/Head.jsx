@@ -6,6 +6,7 @@ export default function Head({ sidebarHandler, darkMode, setDarkMode } = props) 
 	function changeMode() {
 		setDarkMode(prev => !prev);
 	}
+
 	return (
 
 		<header className={`header ${darkMode ? "isDark" : ""}`}>
