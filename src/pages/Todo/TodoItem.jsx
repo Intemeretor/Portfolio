@@ -9,13 +9,13 @@ export default function TodoItem({ card, changeCard, darkMode, cardId } = props)
 	});
 	const [todo, setTodo] = useState([]);
 
-	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem(`todos${cardId}`));
-		setTodo(data || []);
-	}, []);
-	useEffect(() => {
-		localStorage.setItem(`todos${cardId}`, JSON.stringify(todo));
-	}, [todo]);
+	// useEffect(() => {
+	// 	const data = JSON.parse(localStorage.getItem(`todos${cardId}`));
+	// 	setTodo(data || []);
+	// }, []);
+	// useEffect(() => {
+	// 	localStorage.setItem(`todos${cardId}`, JSON.stringify(todo));
+	// }, [todo]);
 
 
 
