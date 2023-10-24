@@ -20,6 +20,7 @@ export default function TodoItem({ card, changeCard, darkMode, cardId } = props)
 
 
 
+
 	function newTodoHandler(e) {
 		setNewTodo(prev => ({ ...prev, text: e.target.value }));
 	}
@@ -63,7 +64,6 @@ export default function TodoItem({ card, changeCard, darkMode, cardId } = props)
 						case "delete":
 							break;
 					}
-
 				}
 			}
 			return newArr
@@ -87,12 +87,11 @@ export default function TodoItem({ card, changeCard, darkMode, cardId } = props)
 			id={cardId}
 			className={`todo__item ${darkMode ? 'isDark' : ""}`}
 			style={{
-				position: card.cardPosition.moved ? "relative" : "relative",
+				position: card.cardPosition.moved ? "absolute" : "relative",
 				top: `${card.cardPosition.currentPosition.y}px`,
 				left: `${card.cardPosition.currentPosition.x}px`,
 				zIndex: card.cardIndex
 			}}>
-
 			<div
 				className="todo__head"
 				onMouseDown={(e) => changeCard(e, "startDragging", cardId)}

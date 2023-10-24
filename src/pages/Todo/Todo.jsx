@@ -55,7 +55,6 @@ export default function Todo({ darkMode } = props) {
 
 				}
 				else {
-
 					let edited;
 					switch (changeType) {
 						case "nameChange":
@@ -72,6 +71,8 @@ export default function Todo({ darkMode } = props) {
 							break;
 						case "startDragging":
 							setCurrentCard(id);
+							console.log(e.target.getBoundingClientRect().top);
+							console.log(e.clientY);
 							edited = {
 								...prev[i],
 								cardIndex: 100,
@@ -83,22 +84,28 @@ export default function Todo({ darkMode } = props) {
 										y: e.clientY,
 									},
 
+									distance: {
+										x: e.target.getBoundingClientRect().left,
+										y: e.target.getBoundingClientRect().top,
+									},
 
 								}
 							};
 							newArr.push(edited);
 							break;
 						case "dragging":
+
 							if (prev[i].cardPosition.canDrag) {
+
 								edited = {
 									...prev[i], cardPosition: {
 										...prev[i].cardPosition,
 										currentPosition: {
 											x: e.clientX - prev[i].cardPosition.startPosition.x + prev[i].cardPosition.distance.x,
-											y: e.clientY - prev[i].cardPosition.startPosition.y + prev[i].cardPosition.distance.y,
+											y: e.clientY - prev[i].cardPosition.startPosition.y + prev[i].cardPosition.distance.y + window.scrollY,
 										},
 										active: true,
-
+										moved: true
 									}
 								}
 								newArr.push(edited);
@@ -113,10 +120,11 @@ export default function Todo({ darkMode } = props) {
 										x: prev[i].cardPosition.currentPosition.x,
 										y: prev[i].cardPosition.currentPosition.y,
 									},
-									moved: true,
+
 								}
 							}
 							newArr.push(edited);
+							setCurrentCard(prev => -1);
 							break;
 						case "delete":
 							break;
@@ -129,6 +137,7 @@ export default function Todo({ darkMode } = props) {
 
 	};
 
+
 	let cards = todoCards.map((item, index) => <TodoItem
 		changeCard={changeCard}
 		setTodoCards={setTodoCards}
@@ -138,11 +147,11 @@ export default function Todo({ darkMode } = props) {
 		key={index}
 	/>);
 
-	useEffect(() => {
-		let arr = [1, 2, 3, 4];
-		console.log(arr);
-		return
-	}, [])
+
+
+
+	// При видаленні здвиг усіх елементів нагору якщо релатів
+	// При переміщенні елементів елемент здвигається нагору на начальну позицію флекс елементу якщо абсолют
 	return (
 
 		<section className='todo'
